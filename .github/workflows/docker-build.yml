@@ -34,5 +34,5 @@ steps:
 
    - name: Build and push Docker image
      run: |
-       docker build -t ${{ secrets.DOCKER_USERNAME }}/shipment-delay-api .
-       docker push ${{ secrets.DOCKER_USERNAME }}/shipment-delay-api
+       docker build -t shubhityagi22/shipment-delay-api:latest .
+       docker push shubhityagi22/shipment-delay-api:latest
