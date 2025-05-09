@@ -1,0 +1,38 @@
+name: CI/CD Pipeline
+
+on:
+   push:
+      branches: [ main ]
+
+
+jobs:
+   build-and-push:
+            runs-on: ubuntu-latest
+
+steps:
+   - name: Checkout repository
+     uses: actions/checkout@v2
+
+   - name: Set up Python
+   - uses: actions/setup-python@v2
+     with:
+       python-version: 3.9
+
+   - name: Install dependencies
+     run: |
+       pip install -r requirements.txt
+
+   - name: Run tests
+     run: |
+       echo "No tests implemented yet"
+
+   - name: Login to Dockerhub
+   - uses: docker/login-action@v2
+     with:
+       username: ${{ secrets.DOCKER_USERNAME }}
+       password: ${{ secrets.DOCKER_PASSWORD }}
+
+   - name: Build and push Docker image
+     run: |
+       docker build -t ${{ secrets.DOCKER_USERNAME }}/shipment-delay-api .
+       docker push ${{ secrets.DOCKER_USERNAME }}/shipment-delay-api
